@@ -9,7 +9,8 @@
 # zero() -> clear current cell
 # add(k) -> add current cell value to (current + k) cell
 # mov(k) -> move current cell value to (current + k) cell
-# copy(k, t) -> copy current cell value to (current + k) cell, using (current + k + t) cell
+# copy(k, t) -> copy current cell value to (current + k) cell, 
+# using (current + k + t) cell
 #
 # Coming soon:
 # - Macroses
