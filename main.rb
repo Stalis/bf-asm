@@ -29,26 +29,12 @@ class Compiler
 
   private
 
-  # @tokens = {
-  #   '@' => shift,
-  #   'shift' => shift,
-  #   'inc' => inc,
-  #   'dec' => dec,
-  #   'set' => set,
-  #   'zero' => zero,
-  #   'add' => add,
-  #   'mov' => mov,
-  #   'copy' => copy,
-  #   'scan' => scan,
-  #   'print' => print
-  # }
-
   def translate(command_line)
     line = command_line.split('(')
     cmd = line[0]
-    puts('cmd: ' + (cmd.nil? ? 'nil' : cmd))
-    args = line[1].split(',').map { |item| item.chomp.chomp(')') }
-    puts('args: ' + (args.nil? ? 'nil' : args.to_s))
+    # puts('cmd: ' + (cmd.nil? ? 'nil' : cmd))
+    args = line[1].nil? ? '' : line[1].split(',').map { |item| item.chomp.chomp(')') }
+    # puts('args: ' + (args.nil? ? 'nil' : args.to_s))
     res = ''
 
     case cmd
@@ -75,9 +61,10 @@ class Compiler
     when 'print'
       res += print
     end
-    puts('res: ' + (res.nil? ? 'nil' : res))
+
+    # puts('res: ' + (res.nil? ? 'nil' : res))
     @result += res
-    puts('result: ' + @result)
+    # puts('result: ' + @result)
   end
 
   def repeat(k, action)
