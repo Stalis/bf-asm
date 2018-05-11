@@ -1,0 +1,24 @@
+@(3)
+set(10) ;It's my comment
+@(-1)
+zero
+
+set(3)
+loop    ; Translate to '[*body*]'
+  @(2)
+  inc(6)
+  @(-2)
+endloop
+
+add(1)
+copy(1,2)
+
+#ifzero 2     
+#inline ++>+
+#else
+#inline -->-
+#end
+
+using @(2)  ; Translate to >>*body*<<
+  set(3)
+end
