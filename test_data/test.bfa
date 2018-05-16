@@ -1,0 +1,49 @@
+;@ 3
+;set 10 ; It's my comment
+;@ -1
+;zero
+
+set 3
+; >>[-]+<<[>>>++<<<>>[-]<<[-]]>>[<<<<<<+.>>>>>>>>>>[-]]<<
+#loop     ; Translate to '[*body*]'
+  #loop
+    #ifzero 2
+      #using 3
+        #inline
+          ++
+        #end
+      #end
+    #else
+      #using -4
+        #inline
+          +
+          .
+          >>> >
+        #end
+      #end
+    #end
+    @ 2
+    inc 6
+    @ -2
+  #end
+#end
+
+;add 1
+;copy 1 2
+
+;print 3
+;scan 2
+
+;#ifzero 2     
+; #inline 
+;   ++>+
+; #end
+;#else
+; #inline 
+;   -->-
+; #end
+;#end
+
+;#using 2  ; Translate to >>*body*<<
+;  set 3
+;#end
