@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require_relative 'lib/tokenizer'
+require_relative 'lib/translator'
+
 # class of Compiler
 class Compiler
   attr_reader :result
@@ -7,11 +10,10 @@ class Compiler
     @result = ''
     @lines = []
     @tokens = []
-    @allow_add_lines = true
   end
 
   def compile(lines)
-    @result = translate tokenize(lines)
+    @result = translate tokenize parse lines
   end
 
   def parse(lines)
@@ -21,29 +23,16 @@ class Compiler
         cmd.chomp!
         cmd.rstrip!
       end
-      cmd
+      cmd.reverse.strip.reverse
     end).delete_if { |line| line.nil? || line.empty? }
   end
 
   def tokenize(lines)
-    # translate lines to tokens like:
-    # copy(1,2) ->
-    #   {'type' => 'operator', 'command' => 'copy', 'args' => ['1', '2']}
-    #
-    # #inline *bf_code* ->
-    #   {'type' => 'inline', 'body' => { 'code' => *bf_code* } }
-    #
-    # loop
-    #  *code*
-    # endloop ->
-    #   {'type' => 'cycle', 'body' => { 'content' => [*tokens*] }}
-    tokens = []
-
-    tokens
+    Tokenizer.tokenize(lines)
   end
 
   def translate(tokens)
-    tokens
+    Translator.translate(tokens)
   end
 end
 
@@ -56,11 +45,19 @@ if $PROGRAM_NAME == __FILE__
 
     c = Compiler.new
     # puts c.compile(lines)
-    puts c.parse(lines)
+    # puts c.parse(lines)
 
-    # puts c.result
-    # File.open(ARGV[0].split('.')[0] + '.bf', 'w+') do |file|
-    #   file.puts c.result
-    # end
+    c.compile(lines)
+
+    puts c.result
+    if ARGV[1].nil?
+      File.open(ARGV[0].split('.')[0] + '.bf', 'w+') do |file|
+        file.puts c.result
+      end
+    else
+      File.open(ARGV[1], 'w+') do |file|
+        file.puts c.result
+      end
+    end
   end
 end
