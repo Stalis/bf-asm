@@ -1,10 +1,10 @@
 # Assembly for Brainfuck
 ## bf-asm
 ## Ideas:
-[] Add absolute cell linking
-[] Add inserts of BF
-[] Add if-then-else operation
-[] Add Macroses
+- [ ] Add absolute cell linking
+- [ ] Add inserts of BF
+- [ ] Add if-then-else operation
+- [ ] Add Macroses
 
 ## Comments:
 ```; This in one-line comment```
